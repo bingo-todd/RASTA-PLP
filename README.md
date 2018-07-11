@@ -1,4 +1,4 @@
-# RASTA(Relative Spectral Transform)[^hermansky1994]
+# RASTA(Relative Spectral Transform)
 下面的介绍摘自[PLP and RASTA (and MFCC, and inversion) in Matlab](https://labrosa.ee.columbia.edu/matlab/rastamat/)
 
 > RASTA is a separate technique from RASTA-PLP(Relative Spectral Transform - Perceptual Linear Prediction, a popular speech feature representation). RASTA applies a band-pass filter to the energy in each frequency subband in order to smooth over short-term noise variation and to remove any constant offset resulting from static spectral coloration in the speech channel
@@ -6,7 +6,7 @@
 RASTA的提出者Hermansky在论文中写道
 > It suppresses the spectral components that change more slowly or quickly that the typical range of change speech
 
-计算过程
+计算过程[^hermansky1994]
 ![](media/15305298455798/15308643338626.jpg)
 
 1. Compute the critical-band power spectrum
@@ -27,7 +27,8 @@ RASTA的提出者Hermansky在论文中写道
 
     **非因果**
     
-在实现过程中，可以分步实现该滤波器。首先$z^{4}$即是将输入信号提前4个采样点，剩下的部分![](http://latex.codecogs.com/gif.latex?\\0.1\frac{2+z^{-1}-z^{-3}-2z^{-4}}{1-0.98z^{-1}})即是因果系统了。但是这样设计的动机是什么？
+在实现过程中，可以分步实现该滤波器。首先$z^{4}$即是将输入信号提前4个采样点，剩下的部分![](http://latex.codecogs.com/gif.latex?\\0.1\frac{2+z^{-1}-z^{-3}-2z^{-4}}{1-0.98z^{-1}})即是因果系统了。但设置延时的目的动机是什么？
+
 4. Transform the filtered speech representation through expanding static nonlinear transformation
 
     与步骤2相反，取指数
